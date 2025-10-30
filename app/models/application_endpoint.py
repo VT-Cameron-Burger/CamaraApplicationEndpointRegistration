@@ -5,19 +5,17 @@ This module contains the application endpoint models including ApplicationEndpoi
 ApplicationEndpointsInfo, and API request/response models.
 """
 
-from pydantic import BaseModel, Field, field_validator, ValidationInfo, ConfigDict
+# Import types from CamaraCommon
+from CamaraCommon.Network import Port, SingleIpv4Addr
+from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 # Import basic types
 from .basic_types import (
-    DomainName,
-    SingleIpv6Addr,
-    EdgeCloudZone,
     ApplicationProfileId,
-    ApplicationEndpointListId,
+    DomainName,
+    EdgeCloudZone,
+    SingleIpv6Addr,
 )
-
-# Import types from CamaraCommon
-from CamaraCommon.Network import Port, SingleIpv4Addr
 
 
 class ApplicationEndpoint(BaseModel):

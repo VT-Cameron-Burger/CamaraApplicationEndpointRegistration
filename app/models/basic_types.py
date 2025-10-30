@@ -5,9 +5,10 @@ This module contains the fundamental data types used across the API including
 edge cloud zone definitions, domain names, IP addresses, and other basic types.
 """
 
-from uuid import UUID
 from enum import Enum
-from pydantic import BaseModel, Field, ConfigDict
+from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict, Field
 
 # Regex patterns for validation
 FQDN_PATTERN = (
