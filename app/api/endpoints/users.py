@@ -2,8 +2,6 @@
 User management endpoints
 """
 
-from typing import Dict, List
-
 from fastapi import APIRouter, HTTPException
 
 from app.models.user import User, UserCreate, UserResponse
@@ -12,7 +10,7 @@ router = APIRouter()
 
 # In-memory storage for demo purposes
 # In a real application, you would use a database
-users_db: List[User] = []
+users_db: list[User] = []
 
 
 @router.post("/users", response_model=UserResponse)
@@ -33,8 +31,8 @@ async def create_user(user: UserCreate) -> UserResponse:
     return UserResponse.model_validate(new_user)
 
 
-@router.get("/users", response_model=List[UserResponse])
-async def get_users(skip: int = 0, limit: int = 100) -> List[UserResponse]:
+@router.get("/users", response_model=list[UserResponse])
+async def get_users(skip: int = 0, limit: int = 100) -> list[UserResponse]:
     """
     Get all users
     """
@@ -70,7 +68,7 @@ async def update_user(user_id: int, user_update: UserCreate) -> UserResponse:
 
 
 @router.delete("/users/{user_id}")
-async def delete_user(user_id: int) -> Dict[str, str]:
+async def delete_user(user_id: int) -> dict[str, str]:
     """
     Delete a user
     """

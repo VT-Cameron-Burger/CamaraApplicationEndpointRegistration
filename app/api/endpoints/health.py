@@ -3,7 +3,6 @@ Health check endpoints
 """
 
 from datetime import datetime, timezone
-from typing import Dict, Union
 
 from fastapi import APIRouter
 
@@ -13,7 +12,7 @@ router = APIRouter()
 
 
 @router.get("/health")
-async def health_check() -> Dict[str, Union[str, bool]]:
+async def health_check() -> dict[str, str | bool]:
     """
     Health check endpoint
     """
@@ -25,7 +24,7 @@ async def health_check() -> Dict[str, Union[str, bool]]:
 
 
 @router.get("/health/detailed")
-async def detailed_health_check() -> Dict[str, Union[str, Dict[str, str]]]:
+async def detailed_health_check() -> dict[str, str | dict[str, str]]:
     """
     Detailed health check with more information
     """

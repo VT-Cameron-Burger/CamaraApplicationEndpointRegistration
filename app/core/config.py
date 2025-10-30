@@ -2,10 +2,8 @@
 Application Configuration Settings
 """
 
-from typing import List, Union
-
 from pydantic import field_validator
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -29,7 +27,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./app.db"
 
     # CORS
-    ALLOWED_HOSTS: Union[List[str], str] = [
+    ALLOWED_HOSTS: list[str] | str = [
         "http://localhost:3000",
         "http://localhost:8080",
         "http://127.0.0.1:3000",
@@ -37,14 +35,12 @@ class Settings(BaseSettings):
 
     @field_validator("ALLOWED_HOSTS", mode="before")
     @classmethod
-    def parse_allowed_hosts(cls, v: Union[str, List[str]]) -> List[str]:
+    def parse_allowed_hosts(cls, v: str | list[str]) -> list[str]:
         if isinstance(v, str):
             return [host.strip() for host in v.split(",")]
         return v
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
 
 # Create settings instance

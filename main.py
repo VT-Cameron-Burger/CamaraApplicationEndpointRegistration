@@ -3,8 +3,6 @@
 Main FastAPI Application Entry Point
 """
 
-from typing import Dict
-
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,7 +34,7 @@ app.include_router(users.router, prefix="/api/v1", tags=["users"])
 
 
 @app.get("/")
-async def root() -> Dict[str, str]:
+async def root() -> dict[str, str]:
     """Root endpoint"""
     return {
         "message": "Welcome to the Python HTTP API",
