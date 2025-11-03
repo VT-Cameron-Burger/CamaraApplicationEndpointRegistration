@@ -10,12 +10,7 @@ from CamaraCommon.Network import Port, SingleIpv4Addr
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 # Import basic types
-from .basic_types import (
-    ApplicationProfileId,
-    DomainName,
-    EdgeCloudZone,
-    SingleIpv6Addr,
-)
+from .basic_types import ApplicationProfileId, DomainName, EdgeCloudZone, SingleIpv6Addr
 
 
 class ApplicationEndpoint(BaseModel):

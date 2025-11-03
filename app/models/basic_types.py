@@ -13,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field
 # Regex patterns for validation
 FQDN_PATTERN = (
     r"^[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?"  # First label
-    r"(\.[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)*$"  # Additional labels
+    r"(\.[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+$"  # Additional labels (at least one required)
 )
 
 # IPv6 address pattern - covers all valid IPv6 formats including:
@@ -48,9 +48,9 @@ DNS_LABEL_PATTERN = r"^[A-Za-z0-9]([A-Za-z0-9-]{0,53}[A-Za-z0-9])?$"
 class EdgeCloudZoneStatus(str, Enum):
     """Status of an Edge Cloud Zone"""
 
-    AVAILABLE = "AVAILABLE"
-    UNAVAILABLE = "UNAVAILABLE"
-    UNKNOWN = "UNKNOWN"
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    UNKNOWN = "unknown"
 
 
 class DomainName(BaseModel):
@@ -61,6 +61,8 @@ class DomainName(BaseModel):
     value: str = Field(
         ...,
         pattern=FQDN_PATTERN,
+        min_length=4,
+        max_length=253,
         examples=["api.example.com", "server.zone1.provider.com"],
     )
 
