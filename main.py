@@ -7,13 +7,13 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.endpoints import health, users
+from app.api.router import api_router
 from app.core.config import settings
 
 # Create FastAPI instance
 app = FastAPI(
     title=settings.PROJECT_NAME,
-    description="A Python HTTP API built with FastAPI",
+    description="CAMARA Application Endpoint Registration API - A Python HTTP API built with FastAPI for managing application endpoint registrations in edge cloud platforms",
     version=settings.VERSION,
     docs_url="/docs",
     redoc_url="/redoc",
@@ -28,18 +28,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include routers
-app.include_router(health.router, prefix="/api/v1", tags=["health"])
-app.include_router(users.router, prefix="/api/v1", tags=["users"])
+# Include the main API router
+app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/")
 async def root() -> dict[str, str]:
     """Root endpoint"""
     return {
-        "message": "Welcome to the Python HTTP API",
+        "message": "Welcome to the CAMARA Application Endpoint Registration API",
         "version": settings.VERSION,
         "docs": "/docs",
+        "specification": "CAMARA Application Endpoint Registration vwip",
     }
 
 
